@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.springboot.tlboard.mapper.TlBoardMapper">
+	
+	<insert id="insertTlBoard" useGeneratedKeys="true" keyProperty="board_idx" parameterType="com.example.springboot.tlboard.vo.TlBoardVo">
+		INSERT INTO TL_BOARD ( WRITER
+						     , SUBJECT
+						     , CONTENT
+						     , HIT_CNT
+						     , DEL_YN
+						     , DATE_CREATED
+						     , DATE_MODIFIED) 
+					  VALUES ( #{writer}
+					         , #{subject}
+					         , #{content}
+					         , 0
+					         , 'N'
+					         , NOW()
+					         , NOW())
+	</insert>
+	
+	<select id="getTlBoardCount" resultType="int">
+		SELECT COUNT(BOARD_IDX) 
+		  FROM TL_BOARD
+		 WHERE DEL_YN = 'N'
+	</select>
+	
+	<select id="getTlBoardSearchCount" parameterType="map" resultType="int">
+		SELECT COUNT(BOARD_IDX) 
+		  FROM TL_BOARD
+		  <include refid="search"></include>
+	</select>
+	
+	<select id="selectTlBoardList" parameterType="map" resultType="com.example.springboot.tlboard.vo.TlBoardVo">
+		SELECT BOARD_IDX
+		     , WRITER
+		     , SUBJECT
+		     , CONTENT
+		     , HIT_CNT
+		     , DEL_YN
+		     , DATE_CREATED
+		     , DATE_MODIFIED
+		  FROM TL_BOARD
+		 WHERE DEL_YN = 'N'
+	  ORDER BY BOARD_IDX DESC
+	     LIMIT #{pageStart}, #{perPageNum}
+	</select>
+	
+	<select id="getTlBoardSearchList" parameterType="map" resultType="com.example.springboot.tlboard.vo.TlBoardVo">
+		SELECT BOARD_IDX
+		     , WRITER
+		     , SUBJECT
+		     , CONTENT
+		     , HIT_CNT
+		     , DEL_YN
+		     , DATE_CREATED
+		     , DATE_MODIFIED
+		  FROM TL_BOARD
+		  <include refid="search"></include>
+	  ORDER BY BOARD_IDX DESC
+	     LIMIT #{perPageNum} OFFSET #{pageStart}
+	</select>
+	
+	<sql id="search">
+	    <choose>
+	        <!-- 검색옵션이 전체 검색일 경우 -->
+	        <when test="searchOption == 'all'">
+	            WHERE (WRITER like '%${keyword}%'
+	               OR SUBJECT like '%${keyword}%'
+	               OR CONTENT like '%${keyword}%')
+	              AND DEL_YN = 'N'
+	        </when>
+	        <!-- 전체 검색이 아닐 경우 -->
+	        <otherwise>
+	            WHERE ${searchOption} like '%${keyword}%'
+	              AND DEL_YN = 'N'
+	        </otherwise>
+	    </choose>
+	</sql>
+	
+	<select id="getTlBoardDetail" parameterType="int" resultType="com.example.springboot.tlboard.vo.TlBoardVo">
+		SELECT BOARD_IDX
+		     , WRITER
+		     , SUBJECT
+		     , CONTENT
+		     , HIT_CNT
+		     , DEL_YN
+		     , DATE_CREATED
+		     , DATE_MODIFIED
+		  FROM TL_BOARD
+		 WHERE BOARD_IDX = #{board_idx}
+	</select>
+	
+	<update id="updateTlBoard" parameterType="com.example.springboot.tlboard.vo.TlBoardVo">
+		UPDATE TL_BOARD 
+		   SET WRITER = #{writer}
+		     , SUBJECT = #{subject}
+		     , CONTENT = #{content}
+		     , DATE_MODIFIED = NOW()
+		 WHERE BOARD_IDX = #{board_idx}
+	</update>
+	
+	<update id="addHitCount" parameterType="int">
+		UPDATE TL_BOARD 
+		   SET HIT_CNT = HIT_CNT+1 
+		 WHERE BOARD_IDX = #{board_idx}
+	</update>
+	
+	<update id="tlBoardDel" parameterType="int">
+		UPDATE TL_BOARD 
+		   SET DEL_YN = 'Y'
+		 WHERE BOARD_IDX = #{board_idx}
+	</update>
+		
+</mapper>

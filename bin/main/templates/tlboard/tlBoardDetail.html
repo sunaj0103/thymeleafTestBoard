@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>게시판</title>
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+
+<script>
+function delChk(){
+	if(confirm("글을 삭제하시겠습니까?")){
+		location.href="/tlBoard/tlBoardDel?idx=[[${tlBoardDtl.board_idx}]]";
+	}
+}
+	
+function editChk(){
+	location.href="/tlBoard/tlBoardEdit?idx=[[${tlBoardDtl.board_idx}]]";
+}
+
+$(function(){
+	
+});
+</script>
+<body>
+<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<h2>게시판</h2>
+			</div>
+			<div>
+				<div class="col-sm-12 text-center brdTop brdBtm">[[${tlBoardDtl.subject}]]</div>
+				<div class="col-sm-4 text-center brdBtm">글쓴이: [[${tlBoardDtl.writer}]]</div>
+				<div class="col-sm-4 text-center brdBtm">작성일: [[${tlBoardDtl.date_created}]]</div>
+				<div class="col-sm-4 text-center brdBtm">조회수: [[${tlBoardDtl.hit_cnt}]]</div>
+				<div class="col-sm-12"><br></div>
+				<div class="col-sm-offset-2 col-sm-8 content">[[${tlBoardDtl.content}]]</div>
+				<div class="col-sm-12"></div>
+				<div class="col-sm-12"><br></div>
+				<div class="col-sm-offset-5 col-sm-2">
+				    <a href="javascript:editChk()" class="btn btn-success btn-md">수정</a>
+			        <a href="javascript:delChk()" class="btn btn-warning btn-md">삭제</a>
+			    </div>
+			    <div class="col-sm-12"></div>
+				<div class="col-sm-offset-10 col-sm-1">
+					<a href="/tlBoard/tlBoardList" class="btn btn-info btn-md">목록</a>
+				</div>
+			</div>	
+		</div>
+	</div>
+</body>
+</html>

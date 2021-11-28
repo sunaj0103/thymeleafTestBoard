@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>회원가입</title>
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<script>
+	var msg = "[[${msg}]]";
+	console.log(msg);
+	if (isEmpty(msg) == false){
+		alert(msg);
+	} else {
+		alert("회원가입 처리 에러");
+	}
+	history.back();
+	
+	function isEmpty(str){
+	    if(typeof str == "undefined" || str == null || str == "") {
+	    	return true;
+	    } else {
+	    	return false;
+	    }
+	       
+	}
+	
+</script>
+<body>
+	<div></div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.springboot.signuplogin.mapper.MemberMapper">
+	
+	<insert id="insertSignup" useGeneratedKeys="true" keyProperty="mem_idx" parameterType="com.example.springboot.signuplogin.vo.MembersVo">
+		INSERT INTO MEMBERS ( MEM_USERID
+						    , MEM_PASSWORD
+						    , MEM_EMAIL
+						    , MEM_USERNAME
+						    , MEM_GENDER
+						    , MEM_REGTIME
+						    , MEM_PASS_CHANGE
+						    , MEM_WITHDRAWAL_YN
+						    , DATE_CREATED
+						    , DATE_MODIFIED) 
+					 VALUES ( #{mem_userid}
+					        , #{mem_password}
+					        , #{mem_email}
+					        , #{mem_username}
+					        , #{mem_gender}
+					        , NOW()
+					        , NOW()
+					        , 'N'
+					        , NOW()
+					        , NOW())
+	</insert>
+	
+	<select id="confirmUser" parameterType="String" resultType="com.example.springboot.signuplogin.vo.MembersVo">
+		SELECT MEM_USERID
+		     , MEM_PASSWORD
+		     , MEM_EMAIL
+		     , MEM_USERNAME
+		     , MEM_GENDER
+		     , MEM_REGTIME
+		     , MEM_PASS_CHANGE
+		     , MEM_WITHDRAWAL_YN
+		     , DATE_CREATED
+		     , DATE_MODIFIED
+		  FROM MEMBERS
+		 WHERE MEM_USERID = #{mem_userid}
+	</select>
+
+</mapper>

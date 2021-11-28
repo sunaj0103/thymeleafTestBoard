@@ -1,0 +1,6 @@
+[2020-02-25 02:30:52:297872][restartedMain] INFO  c.e.springboot.ThymeleafApplication - Starting ThymeleafApplication on DESKTOP-B07U3F2 with PID 20084 (C:\sts-4.5.1.RELEASE\workspace\thymeleaf\bin\main started by J in C:\sts-4.5.1.RELEASE\workspace\thymeleaf)
+[2020-02-25 02:30:52:297872][restartedMain] INFO  c.e.springboot.ThymeleafApplication - No active profile set, falling back to default profiles: default
+[2020-02-25 02:30:53:298254][restartedMain] INFO  c.e.springboot.ThymeleafApplication - Started ThymeleafApplication in 0.416 seconds (JVM running for 298.797)
+[2020-02-25 02:31:01:517][restartedMain] INFO  c.e.springboot.ThymeleafApplication - Starting ThymeleafApplication on DESKTOP-B07U3F2 with PID 20200 (C:\sts-4.5.1.RELEASE\workspace\thymeleaf\bin\main started by J in C:\sts-4.5.1.RELEASE\workspace\thymeleaf)
+[2020-02-25 02:31:01:523][restartedMain] INFO  c.e.springboot.ThymeleafApplication - No active profile set, falling back to default profiles: default
+[2020-02-25 02:31:03:2090][restartedMain] INFO  c.e.springboot.ThymeleafApplication - Started ThymeleafApplication in 1.914 seconds (JVM running for 2.63)

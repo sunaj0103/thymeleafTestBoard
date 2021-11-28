@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<configuration debug="true">
+	<!-- Appenders : 로그를 어디에 출력할지 (콘솔, 파일 기록, DB 저장 등) 결정 -->
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- encoder : appender에 포함되어 출력할 로그를 지정한 형식으로 변환 -->
+		<!-- DEBUG용 -->
+		<encoder>
+			<Pattern>%d %5p [%c] %m%n</Pattern>
+		</encoder>
+	</appender> 
+		
+	<appender name="console-infolog" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- INFO 레벨용 -->
+		<encoder>
+			<Pattern>%d %5p %m%n</Pattern>
+		</encoder>
+	</appender>
+			
+	<!-- 로거 -->
+	<!-- logger : 로그를 출력하는 요소 : level 속성을 통해서 출력할 로그의 레벨을 조절하여 appender에 전달 -->
+	<logger name="board" level="DEBUG" appender-ref="console"/> <!-- DEBUG레벨 로그를 출력하는 형식은 console이라는 이름의 appender를 사용 -->
+	<logger name="jdbc.sqlonly" level="error" appender-ref="console-infolog"/>
+	<logger name="jdbc.resultsettable" level="error" appender-ref="console-infolog"/>
+	<logger name="org.springframework" level="error"/>
+	<logger name="org.springframework.jdbc" level="error"/>
+		
+	<!-- 
+		append level 
+		trace : 모든 로그를 출력합니다. 
+		debug : 개발할 때 디버그 용도로 사용됩니다. 
+		info : 상태 변경 등과 같은 정보성 메세지를 나타냅니다. 
+		warn : 프로그램의 실행에는 문제 없지만 추후 시스템에러의 원인이 될 수 있다는 경고성 메세지를 의미합니다. 
+		error : 요청을 처리하던 도중 문제가 발생한 것을 의미합니다. 
+	 -->
+		 
+	<!-- 루트 로거 -->
+	<root level="debug">
+		<appender-ref ref="console"/>
+	</root>
+</configuration>
